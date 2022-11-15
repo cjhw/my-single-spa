@@ -11,11 +11,20 @@
     <script>
       singleSpa.registerApplication(
         'app1',
-        async () => {
+        async (props) => {
+          console.log('加载1时调用')
           return {
-            bootstrap: async (props) => {
-              console.log('bootstrap1')
-            },
+            bootstrap: [
+              async (props) => {
+                console.log('bootstrap1')
+              },
+              async (props) => {
+                console.log('bootstrap1')
+              },
+              async (props) => {
+                console.log('bootstrap1')
+              },
+            ],
             mount: async (props) => {
               console.log('mount1')
             },
@@ -26,6 +35,28 @@
         },
         (location) => location.hash.startsWith('#/app1'),
         { store: { name: 'cai', age: 18 } }
+      )
+
+      singleSpa.registerApplication(
+        'appName2',
+        async (props) => {
+          console.log('加载2时调用')
+          return {
+            bootstrap: async (props) => {
+              console.log('bootstrap2')
+            },
+            mount: async (props) => {
+              console.log('mount2')
+            },
+            unmount: async (props) => {
+              console.log('unmount2')
+            },
+          }
+        },
+        (location) => location.hash.startsWith('#/app2'),
+        {
+          store: { a: 2 },
+        }
       )
 
       singleSpa.start()

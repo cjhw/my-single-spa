@@ -7,8 +7,17 @@
     <title>Document</title>
   </head>
   <body>
+    <a onclick="app1()" style="margin-right: 20px">应用1</a>
+    <a onclick="app2()">应用2</a>
     <script src="lib/umd/my-single-spa.js"></script>
     <script>
+      function app1() {
+        history.pushState({}, '', '/app1')
+      }
+      function app2() {
+        history.pushState({}, '', '/app2')
+      }
+
       singleSpa.registerApplication(
         'app1',
         async (props) => {
@@ -33,7 +42,7 @@
             },
           }
         },
-        (location) => location.hash.startsWith('#/app1'),
+        (location) => location.pathname.indexOf('/app1') > -1,
         { store: { name: 'cai', age: 18 } }
       )
 
@@ -53,7 +62,7 @@
             },
           }
         },
-        (location) => location.hash.startsWith('#/app2'),
+        (location) => location.pathname.indexOf('/app2') > -1,
         {
           store: { a: 2 },
         }

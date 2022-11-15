@@ -5,6 +5,8 @@ import { toUnmountPromise } from '../lifecycles/unmount'
 import { toBootstrapPromise } from '../lifecycles/bootstrap'
 import { toMountPromise } from '../lifecycles/mount'
 
+import './navigator-events'
+
 // 处理应用的核心方法
 export function reroute() {
   // 需要知道哪些应用要加载
